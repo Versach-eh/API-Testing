@@ -1,0 +1,344 @@
+{
+	"info": {
+		"_postman_id": "9ba7ad5c-65ee-4132-ac18-57ad5a97f1a9",
+		"name": "JSONPlaceholder Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Response is a non-empty array of users with required fields', function () {",
+							"    const json = pm.response.json();",
+							"    pm.expect(json).to.be.an('array');",
+							"    pm.expect(json.length).to.be.above(0);",
+							"    json.forEach(u => {",
+							"        pm.expect(u).to.be.an('object');",
+							"        pm.expect(u).to.have.property('id');",
+							"        pm.expect(u).to.have.property('name');",
+							"        pm.expect(u).to.have.property('username');",
+							"        pm.expect(u).to.have.property('email');",
+							"    });",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "8be9eab3-0202-4cc3-a72f-73b1c7a272e0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://jsonplaceholder.typicode.com/users",
+				"description": "Generated from cURL: curl --location --request GET 'https://jsonplaceholder.typicode.com/users'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User (id=1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('User schema has required fields', function () {",
+							"    const u = pm.response.json();",
+							"    pm.expect(u).to.be.an('object');",
+							"    pm.expect(u).to.have.property('id');",
+							"    pm.expect(u).to.have.property('name');",
+							"    pm.expect(u).to.have.property('username');",
+							"    pm.expect(u).to.have.property('email');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "80a01754-82db-40e8-9d6c-fdc0593eaa1c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://jsonplaceholder.typicode.com/users/1",
+				"description": "Generated from cURL: curl --location --request GET 'https://jsonplaceholder.typicode.com/users/1'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 201', function () {",
+							"    pm.response.to.have.status(201);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Created post schema has required fields', function () {",
+							"    const p = pm.response.json();",
+							"    pm.expect(p).to.be.an('object');",
+							"    pm.expect(p).to.have.property('id');",
+							"    pm.expect(p).to.have.property('title');",
+							"    pm.expect(p).to.have.property('body');",
+							"    pm.expect(p).to.have.property('userId');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "dc0b777d-fce9-47db-b016-ba8f6cb40c4d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://jsonplaceholder.typicode.com/posts",
+				"description": "Generated from cURL: curl --location --request POST 'https://jsonplaceholder.typicode.com/posts' --header 'Content-Type: application/json' --data-raw '{\"title\":\"foo\",\"body\":\"bar\",\"userId\":1}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post (id=1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Updated post schema has required fields', function () {",
+							"    const p = pm.response.json();",
+							"    pm.expect(p).to.be.an('object');",
+							"    pm.expect(p).to.have.property('id');",
+							"    pm.expect(p).to.have.property('title');",
+							"    pm.expect(p).to.have.property('body');",
+							"    pm.expect(p).to.have.property('userId');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "8c9bd612-f9a5-4df8-ab05-d71f3d40fa0a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":1,\"title\":\"updated title\",\"body\":\"updated body\",\"userId\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://jsonplaceholder.typicode.com/posts/1",
+				"description": "Generated from cURL: curl --location --request PUT 'https://jsonplaceholder.typicode.com/posts/1' --header 'Content-Type: application/json' --data-raw '{\"id\":1,\"title\":\"updated title\",\"body\":\"updated body\",\"userId\":1}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User (invalid id)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 404 (invalid user id)', function () {",
+							"    pm.response.to.have.status(404);",
+							"})",
+							"",
+							"pm.test('Response is JSON (or empty object)', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"    const json = pm.response.json();",
+							"    pm.expect(json).to.be.an('object');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "7828244e-54ff-4d91-8375-e2809dacad1d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://jsonplaceholder.typicode.com/users/999999",
+				"description": "Generated from cURL: curl --location --request GET 'https://jsonplaceholder.typicode.com/users/999999'"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Post (missing title)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 201 (API accepts missing title)', function () {",
+							"    pm.response.to.have.status(201);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Created post schema has id/body/userId (title may be missing)', function () {",
+							"    const p = pm.response.json();",
+							"    pm.expect(p).to.be.an('object');",
+							"    pm.expect(p).to.have.property('id');",
+							"    pm.expect(p).to.have.property('body');",
+							"    pm.expect(p).to.have.property('userId');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "99e3a4b3-2dc5-4a87-bbe0-e6688d16c37d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"body\":\"bar\",\"userId\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://jsonplaceholder.typicode.com/posts",
+				"description": "Generated from cURL: curl --location --request POST 'https://jsonplaceholder.typicode.com/posts' --header 'Content-Type: application/json' --data-raw '{\"body\":\"bar\",\"userId\":1}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post (wrong content-type)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test('Status code is 200 (JSONPlaceholder accepts text/plain)', function () {",
+							"    pm.response.to.have.status(200);",
+							"})",
+							"",
+							"pm.test('Response is JSON', function () {",
+							"    pm.response.to.have.header('Content-Type');",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})",
+							"",
+							"pm.test('Response is an object (basic schema)', function () {",
+							"    const p = pm.response.json();",
+							"    pm.expect(p).to.be.an('object');",
+							"})"
+						]
+					}
+				}
+			],
+			"id": "9f75ffdb-ebfe-4571-badf-a9c1e49c461d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/plain"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "not-json",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": "https://jsonplaceholder.typicode.com/posts/1",
+				"description": "Generated from cURL: curl --location --request PUT 'https://jsonplaceholder.typicode.com/posts/1' --header 'Content-Type: text/plain' --data-raw 'not-json'"
+			},
+			"response": []
+		}
+	]
+}
